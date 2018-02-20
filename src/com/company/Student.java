@@ -6,7 +6,7 @@ public class Student {
     private String name;
     private String surname;
     private String studentStatus = "Бюджет";
-    private float averageValue;
+    private Float averageValue;
     private ArrayList inputArray;
 
     private ArrayList<Integer> marks = new ArrayList<>();
@@ -36,9 +36,9 @@ public class Student {
             } else if(numMark instanceof String) {
                 String currentValue = (String) numMark;
 
-                if(currentValue.toLowerCase().equals("a")) marks.add(5);
-                else if(currentValue.toLowerCase().equals("b") || currentValue.toLowerCase().equals("c")) marks.add(4);
-                else if(currentValue.toLowerCase().equals("d") || currentValue.toLowerCase().equals("e")) {
+                if(currentValue.equalsIgnoreCase("a")) marks.add(5);
+                else if(currentValue.equalsIgnoreCase("b") || currentValue.equalsIgnoreCase("c")) marks.add(4);
+                else if(currentValue.equalsIgnoreCase("d") || currentValue.equalsIgnoreCase("e")) {
                     this.studentStatus = "Контракт";
                     marks.add(3);
                 }
@@ -51,14 +51,14 @@ public class Student {
         }
     }
 
-    private float getAverageValue(){
-        float sum = 0, kol = 0;
+    private Float getAverageValue(){
+        Float sum = 0f, kol = 0f;
         for(Object numMark:this.marks){
             sum += (int)numMark;
             kol++;
         }
         this.averageValue = sum / kol * 10;
-        this.averageValue = Math.round(this.averageValue);
+        this.averageValue = (float) Math.round(this.averageValue);
         this.averageValue /= 10;
 
         return this.averageValue;
@@ -85,7 +85,7 @@ public class Student {
     }
 
     public void showStudentInfo(){
-        if(this.averageValue == 0)
+        if(this.averageValue == null)
             calculateMarksArray();
 
         System.out.println("Имя: " + this.name);
